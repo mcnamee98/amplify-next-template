@@ -8,6 +8,9 @@ import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import { redirect} from "next/navigation";
+
+
 Amplify.configure(outputs);
 
 const client = generateClient<Schema>();
@@ -38,25 +41,41 @@ export default function App() {
 
   // @ts-ignore
   return (
-    <main>
-      <h1>{user?.signInDetails?.loginId?.split('@')[0]}'s todos</h1>
-        <button onClick={createTodo}>+ new</button>
-      <ul>
+    <div style={{ padding: '0 20px', maxWidth: '800px', margin: '0 auto' }}>
+      <h1>{user?.signInDetails?.loginId?.split('@')[0] || 'User'}'s todos</h1>
+      <button
+        onClick={createTodo}
+        style={{
+          padding: '10px 20px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          marginBottom: '20px',
+          fontSize: '16px'
+        }}
+      >
+        + new
+      </button>
+      <ul style={{ listStyle: 'none', padding: 0 }}>
         {todos.map((todo) => (
-
-          <li onClick={() => deleteTodo(todo.id)}
-              key={todo.id}>{todo.content}</li>
+          <li
+            onClick={() => deleteTodo(todo.id)}
+            key={todo.id}
+            style={{
+              cursor: 'pointer',
+              padding: '12px',
+              marginBottom: '8px',
+              backgroundColor: '#f8f9fa',
+              border: '1px solid #ddd',
+              borderRadius: '4px'
+            }}
+          >
+            {todo.content}
+          </li>
         ))}
       </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-          Review next steps of this tutorial.
-        </a>
-      </div>
-
-      <button onClick={signOut}>Sign out</button>
-    </main>
+    </div>
   );
 }
