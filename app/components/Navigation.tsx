@@ -10,15 +10,17 @@ export default function Navigation() {
 
   return (
     <nav style={{
+      // position: 'fixed',
+      // top: '0',
       width: '100%',
       padding: '15px 20px',
-      marginBottom: '30px',
+      marginBottom: '10px',
       borderBottom: '2px solid #ddd',
       backgroundColor: '#f8f9fa',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      boxSizing: 'border-box'
+      boxSizing: 'border-box',
     }}>
       <div style={{ display: 'flex', gap: '20px' }}>
         <Link
@@ -31,6 +33,17 @@ export default function Navigation() {
           }}
         >
           Todos
+        </Link>
+        <Link
+          href="/plot"
+          style={{
+            textDecoration: 'none',
+            color: pathname === '/plot' ? '#007bff' : '#333',
+            fontWeight: pathname === '/plot' ? 'bold' : 'normal',
+            fontSize: '16px'
+          }}
+        >
+          Plot
         </Link>
         <Link
           href="/info"

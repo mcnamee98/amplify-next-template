@@ -14,6 +14,7 @@ export default function InfoPage() {
       <ul>
         <li>Create todos</li>
         <li>Delete todos by clicking them</li>
+        <li>Simple Line Plots </li>
         <li>Secure authentication with AWS Cognito</li>
       </ul>
       <div style={{

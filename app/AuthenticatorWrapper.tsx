@@ -11,7 +11,7 @@ export default function AuthenticatorWrapper({
   <Authenticator>
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
     < Navigation />
-      <main style={{ flex: 1 }}>
+      <main style={{ flex: 1 , overflowY: 'auto', paddingBottom: '10px'}}>
           {children}
       </main>
     </div>
