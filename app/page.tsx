@@ -36,9 +36,10 @@ export default function App() {
     client.models.Todo.delete({ id })
   }
 
+  // @ts-ignore
   return (
     <main>
-      <h1>{user?.signInDetails?.loginId}'s todos</h1>
+      <h1>{user?.signInDetails?.loginId.split('@')[0]}'s todos</h1>
         <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
