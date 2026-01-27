@@ -10,6 +10,7 @@ const generateDummyData = () => {
     y: Math.random() * 100,
     z: Math.random() * 50 + 25,
     a: Math.random(),
+    b: Math.random() - 23,
   }));
 };
 
@@ -55,7 +56,51 @@ export default function PlotPage() {
           border: '1px solid #ddd'
         }}>
           <h2>Sample Line Chart</h2>
-          <ResponsiveContainer width={1000} height={100}>
+          <ResponsiveContainer width={1200} height={30}>
+            <LineChart data={data}>
+              <XAxis dataKey="x" hide={true} />
+              <YAxis/>
+              <Line type="monotone"  dataKey="z"  stroke="#8884d8" dot={false} name="Series 1" strokeWidth={1}/>
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis dataKey="x" hide={true} />
+              <YAxis fontSize={'10'}/>
+              <Line type="monotone"  dataKey="z"  stroke="#8884d8" dot={false} name="Series 1" strokeWidth={1}/>
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="b"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="z"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
             <LineChart data={data}>
               <XAxis
                 dataKey="x"
@@ -73,7 +118,228 @@ export default function PlotPage() {
                 strokeWidth={1}
               />
             </LineChart>
-              <LineChart data={data}>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="b"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="z"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="y"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="b"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="z"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="y"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="b"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="z"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="y"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="b"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="z"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="y"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis
+                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              />
+              <Line
+                type="monotone"
+                dataKey="b"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
               {/*<CartesianGrid strokeDasharray="3 3" />*/}
               <XAxis
                 dataKey="x"
@@ -102,7 +368,6 @@ export default function PlotPage() {
               {/*/>*/}
             </LineChart>
           </ResponsiveContainer>
-
           <div style={{ marginTop: '20px' }}>
             <p><strong>Data Points:</strong> {data.length}</p>
             <p style={{ fontSize: '12px', color: '#666' }}>
