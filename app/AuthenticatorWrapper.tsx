@@ -9,9 +9,9 @@ export default function AuthenticatorWrapper({
 }) {
   return (
   <Authenticator>
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
     < Navigation />
-      <main style={{ flex: 1 , overflowY: 'auto', paddingBottom: '10px'}}>
+      <main>
           {children}
       </main>
     </div>

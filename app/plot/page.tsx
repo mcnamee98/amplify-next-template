@@ -4,34 +4,99 @@ import { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Dummy data - we'll replace this with database data later
-const generateDummyData = () => {
-  return Array.from({ length: 1000 }, (_, i) => ({
+const generateDummyData = (count: number) => {
+  return Array.from({ length: count }, (_, i) => ({
     x: i,
     y: Math.random() * 100,
     z: Math.random() * 50 + 25,
     a: Math.random(),
-    b: Math.random() - 23,
+    b: (Math.random() - 0.5) * 10,
   }));
 };
 
 export default function PlotPage() {
   const [data, setData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [numPoints, setNumPoints] = useState(20);
+  const [voltage, setVoltage] = useState(5);
 
   const handleLoadData = () => {
     setIsLoading(true);
     // Simulate data loading delay
     setTimeout(() => {
-      setData(generateDummyData());
+      setData(generateDummyData(numPoints));
       setIsLoading(false);
     }, 50);
   };
 
   return (
-  <div style={{ padding: '0px 0px 0px 0px', maxWidth: 'auto', maxHeight: 'auto', margin: '0 auto' }}>
-      <h1> Data Visualization</h1>
+  <div
+      style={{ padding: 'auto',
+      maxWidth: '1400px',
+      margin: '0 auto',
+      width: '100%',
+      boxSizing: 'border-box'}}>
 
-      <button
+      <h1 style={{ margin: '0 0 0 0' }}>Data Visualization</h1>
+
+      {/* Controls Section */}
+
+      <div style={{
+        marginBottom: '20px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '15px',
+        flexWrap: 'wrap'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <label htmlFor="numPoints" style={{ fontWeight: '500' }}> Number of Points: </label>
+             <input id="numPoints"
+                    type="number"
+                    min="100"
+                    max="1000"
+                    value={numPoints}
+                    onChange={(e) => {
+                        const value = parseInt(e.target.value);
+                        if (!isNaN(value) && value >= 100 && value <= 1000) {
+                            setNumPoints(value);
+                            }
+                        }}
+                    style={{
+                        padding: '8px 12px',
+                        border: '1px solid #ddd',
+                        borderRadius: '4px',
+                        width: '80px',
+                        fontSize: '14px'
+                    }}
+                />
+            </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <label htmlFor="VoltageScale" style={{ fontWeight: '500' }}>
+            Voltage Scale:
+          </label>
+          <input
+            id="VoltageScale"
+            type="number"
+            min="1"
+            max="10000"
+            value={voltage}
+            onChange={(e) => {
+              const value = parseInt(e.target.value);
+              if (!isNaN(value) && value >= 1 && value <= 10000) {
+                setVoltage(value);
+              }
+            }}
+            style={{
+              padding: '8px 12px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              width: '80px',
+              fontSize: '14px'
+            }}
+          />
+        </div>
+       <button
         onClick={handleLoadData}
         disabled={isLoading}
         style={{
@@ -41,12 +106,12 @@ export default function PlotPage() {
           border: 'none',
           borderRadius: '4px',
           cursor: isLoading ? 'not-allowed' : 'pointer',
-          marginBottom: '20px',
           fontSize: '16px',
         }}
       >
         {isLoading ? 'Loading...' : 'Load Data & Display Plot'}
-      </button>
+       </button>
+      </div>
 
       {data.length > 0 ? (
         <div style={{
@@ -55,25 +120,59 @@ export default function PlotPage() {
           borderRadius: '8px',
           border: '1px solid #ddd'
         }}>
-          <h2>Sample Line Chart</h2>
-          <ResponsiveContainer width={1200} height={30}>
+          <h2 style={{ margin: '0 0 15px 0' }}>Sample Line Chart</h2>
+          <div style={{ width: '1200px', height: '600px' }}>
+              <ResponsiveContainer width="100%" height="5%">
+          {/*<ResponsiveContainer width={1200} height={30}>*/}
+
             <LineChart data={data}>
               <XAxis dataKey="x" hide={true} />
-              <YAxis/>
-              <Line type="monotone"  dataKey="z"  stroke="#8884d8" dot={false} name="Series 1" strokeWidth={1}/>
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6} />
+              <Line type="monotone"  dataKey="b"  stroke="#8884d8" dot={false} name="Series 1" strokeWidth={1}/>
             </LineChart>
+
             <LineChart data={data}>
               <XAxis dataKey="x" hide={true} />
-              <YAxis fontSize={'10'}/>
-              <Line type="monotone"  dataKey="z"  stroke="#8884d8" dot={false} name="Series 1" strokeWidth={1}/>
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch2'} fontSize={6} />
+                <Line type="monotone"  dataKey="b"  stroke="#8884d8" dot={false} name="Series 2" strokeWidth={1}/>
             </LineChart>
+
+            <LineChart data={data}>
+              <XAxis dataKey="x" hide={true} />
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch3'} fontSize={6} />
+              <Line type="monotone" dataKey="b" stroke="#8884d8" dot={false} name="Series 3" strokeWidth={1}/>
+            </LineChart>
+
+            <LineChart data={data}>
+              <XAxis dataKey="x" hide={true} />
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch4'} fontSize={6} />
+              <Line type="monotone" dataKey="b" stroke="#8884d8" dot={false} name="Series 4" strokeWidth={1}/>
+            </LineChart>
+
+            <LineChart data={data}>
+              <XAxis   dataKey="x" hide={true} />
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch5'} fontSize={6} />
+              <Line type="monotone" dataKey="b" stroke="#8884d8" dot={false} name="Series 5" strokeWidth={1}/>
+            </LineChart>
+
+            <LineChart data={data}>
+              <XAxis dataKey="x" hide={true} />
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch6'} fontSize={6} />
+              <Line type="monotone" dataKey="b" stroke="#8884d8" dot={false} name="Series 6" strokeWidth={1}/>
+            </LineChart>
+
+            <LineChart data={data}>
+              <XAxis  dataKey="x"  hide={true} />
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch7'} fontSize={6}/>
+              <Line  type="monotone" dataKey="b" stroke="#8884d8" dot={false} name="Series 7" strokeWidth={1}/>
+            </LineChart>
+
             <LineChart data={data}>
               <XAxis
                 dataKey="x"
                 hide={true}
               />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6}
               />
               <Line
                 type="monotone"
@@ -89,42 +188,7 @@ export default function PlotPage() {
                 dataKey="x"
                 hide={true}
               />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
-              />
-              <Line
-                type="monotone"
-                dataKey="z"
-                stroke="#8884d8"
-                dot={false}
-                name="Series 1"
-                strokeWidth={1}
-              />
-            </LineChart>
-            <LineChart data={data}>
-              <XAxis
-                dataKey="x"
-                hide={true}
-              />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
-              />
-              <Line
-                type="monotone"
-                dataKey="y"
-                stroke="#8884d8"
-                dot={false}
-                name="Series 1"
-                strokeWidth={1}
-              />
-            </LineChart>
-            <LineChart data={data}>
-              <XAxis
-                dataKey="x"
-                hide={true}
-              />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6}
               />
               <Line
                 type="monotone"
@@ -140,42 +204,7 @@ export default function PlotPage() {
                 dataKey="x"
                 hide={true}
               />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
-              />
-              <Line
-                type="monotone"
-                dataKey="z"
-                stroke="#8884d8"
-                dot={false}
-                name="Series 1"
-                strokeWidth={1}
-              />
-            </LineChart>
-            <LineChart data={data}>
-              <XAxis
-                dataKey="x"
-                hide={true}
-              />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
-              />
-              <Line
-                type="monotone"
-                dataKey="y"
-                stroke="#8884d8"
-                dot={false}
-                name="Series 1"
-                strokeWidth={1}
-              />
-            </LineChart>
-            <LineChart data={data}>
-              <XAxis
-                dataKey="x"
-                hide={true}
-              />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6}
               />
               <Line
                 type="monotone"
@@ -191,42 +220,7 @@ export default function PlotPage() {
                 dataKey="x"
                 hide={true}
               />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
-              />
-              <Line
-                type="monotone"
-                dataKey="z"
-                stroke="#8884d8"
-                dot={false}
-                name="Series 1"
-                strokeWidth={1}
-              />
-            </LineChart>
-            <LineChart data={data}>
-              <XAxis
-                dataKey="x"
-                hide={true}
-              />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
-              />
-              <Line
-                type="monotone"
-                dataKey="y"
-                stroke="#8884d8"
-                dot={false}
-                name="Series 1"
-                strokeWidth={1}
-              />
-            </LineChart>
-            <LineChart data={data}>
-              <XAxis
-                dataKey="x"
-                hide={true}
-              />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6}
               />
               <Line
                 type="monotone"
@@ -242,42 +236,7 @@ export default function PlotPage() {
                 dataKey="x"
                 hide={true}
               />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
-              />
-              <Line
-                type="monotone"
-                dataKey="z"
-                stroke="#8884d8"
-                dot={false}
-                name="Series 1"
-                strokeWidth={1}
-              />
-            </LineChart>
-            <LineChart data={data}>
-              <XAxis
-                dataKey="x"
-                hide={true}
-              />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
-              />
-              <Line
-                type="monotone"
-                dataKey="y"
-                stroke="#8884d8"
-                dot={false}
-                name="Series 1"
-                strokeWidth={1}
-              />
-            </LineChart>
-            <LineChart data={data}>
-              <XAxis
-                dataKey="x"
-                hide={true}
-              />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6}
               />
               <Line
                 type="monotone"
@@ -293,12 +252,11 @@ export default function PlotPage() {
                 dataKey="x"
                 hide={true}
               />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6}
               />
               <Line
                 type="monotone"
-                dataKey="z"
+                dataKey="b"
                 stroke="#8884d8"
                 dot={false}
                 name="Series 1"
@@ -310,12 +268,11 @@ export default function PlotPage() {
                 dataKey="x"
                 hide={true}
               />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6}
               />
               <Line
                 type="monotone"
-                dataKey="y"
+                dataKey="b"
                 stroke="#8884d8"
                 dot={false}
                 name="Series 1"
@@ -327,8 +284,55 @@ export default function PlotPage() {
                 dataKey="x"
                 hide={true}
               />
-              <YAxis
-                // label={{ value: 'Chan 1', angle: -90, position: 'center'}}
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6}
+              />
+              <Line
+                type="monotone"
+                dataKey="b"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6}
+              />
+              <Line
+                type="monotone"
+                dataKey="b"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6}
+              />
+              <Line
+                type="monotone"
+                dataKey="b"
+                stroke="#8884d8"
+                dot={false}
+                name="Series 1"
+                strokeWidth={1}
+              />
+            </LineChart>
+            <LineChart data={data}>
+              <XAxis
+                dataKey="x"
+                hide={true}
+              />
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch1'} fontSize={6}
               />
               <Line
                 type="monotone"
@@ -345,8 +349,7 @@ export default function PlotPage() {
                 dataKey="x"
                 // label={{ value: 'X Axis', position: 'insideBottom', offset: -5 }}
               />
-              <YAxis
-                // label={{ value: 'Y Axis', angle: -90, position: 'insideLeft' }}
+              <YAxis domain = {[-voltage, voltage]} allowDataOverflow={true} label={'Ch19'} fontSize={6}
               />
               {/*<Tooltip />*/}
               {/*<Legend />*/}
@@ -368,6 +371,8 @@ export default function PlotPage() {
               {/*/>*/}
             </LineChart>
           </ResponsiveContainer>
+          </div>
+
           <div style={{ marginTop: '20px' }}>
             <p><strong>Data Points:</strong> {data.length}</p>
             <p style={{ fontSize: '12px', color: '#666' }}>
