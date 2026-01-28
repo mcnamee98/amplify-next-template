@@ -10,10 +10,10 @@ export default function Navigation() {
 
   return (
     <nav style={{
-      // position: 'fixed',
-      // top: '0',
+      position: 'fixed',
+      top: '0', left: '0',  //Keep navigation bar anchored to top of the screen
       width: '100%',
-      padding: '15px 20px',
+      padding: '10px 15px',
       marginBottom: '10px',
       borderBottom: '2px solid #ddd',
       backgroundColor: '#f8f9fa',
@@ -32,7 +32,7 @@ export default function Navigation() {
             fontSize: '16px'
           }}
         >
-          Todos
+          To Do List
         </Link>
         <Link
           href="/plot"
@@ -43,7 +43,7 @@ export default function Navigation() {
             fontSize: '16px'
           }}
         >
-          Plot
+          Data Visualization
         </Link>
         <Link
           href="/info"
@@ -64,7 +64,7 @@ export default function Navigation() {
         <button
             onClick={signOut}
             style={{
-                    padding: '8px 16px',
+                    padding: '10px 15px',
                     backgroundColor: '#dc3545',
                     color: 'white',
                     border: 'none',

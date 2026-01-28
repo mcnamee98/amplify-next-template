@@ -39,7 +39,6 @@ export default function App() {
     client.models.Todo.delete({ id })
   }
 
-  // @ts-ignore
   return (
     <div style={{ padding: '0 20px', maxWidth: '1000px', margin: '0 auto' }}>
       <h1>{user?.signInDetails?.loginId?.split('@')[0] || 'User'}'s todos</h1>

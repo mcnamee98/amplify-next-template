@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" style={{ height: '100%' }}>
-      <body style={{ margin: 0, padding: 0, width: '100%', height: '100%', overflow: 'scroll' }}>
+      <body style={{ margin: 0, padding: 0, width: '100%', height: '100%', overflow: 'auto' }}>
         <AuthenticatorWrapper>
           {children}
         </AuthenticatorWrapper>
