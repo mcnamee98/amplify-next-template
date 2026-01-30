@@ -19,18 +19,18 @@ const generateDummyData = (count: number, type: string) => {
       case 'waveform2':
         return {
           x: i,
-          y: Math.sin(i * 0.1) * 50,
-          z: Math.cos(i * 0.1) * 50,
-          a: Math.random() * 2,
-          b: (Math.random() * .1) * 10,
+          y: (Math.random() - .5) * 11,
+          z: (Math.random() - .5) * 12,
+          a: (Math.random() - .5) * 9,
+          b: (Math.random() - .5) * 8 ,
         };
       case 'voltage':
         return {
           x: i,
-          y: Math.random() * 12,
-          z: Math.random() * 5 + 3,
-          a: Math.random() * 3.3,
-          b: Math.random() * 24,
+          y: (Math.random() - .4) * 10,
+          z: (Math.random() - .6) * 10,
+          a: (Math.random() - .3) * 10,
+          b: (Math.random() - .7) * 10 ,
         };
       case 'current':
         return {
@@ -62,26 +62,26 @@ const generateDummyData = (count: number, type: string) => {
 
 // Define which data keys each subplot should display
 const subplotConfig = [
-  { dataKey: 'z', color: '#8884d8', name: 'Ch1' },
-  { dataKey: 'z', color: '#8884d8', name: 'Ch2' },
-  { dataKey: 'b', color: '#8884d8', name: 'Ch3' },
-  { dataKey: 'z', color: '#8884d8', name: 'Ch4' },
-  { dataKey: 'y', color: '#8884d8', name: 'Ch5' },
-  { dataKey: 'b', color: '#8884d8', name: 'Ch6'  },
-  { dataKey: 'z', color: '#8884d8', name: 'Ch7'  },
-  { dataKey: 'y', color: '#8884d8', name: 'Ch8'  },
-  { dataKey: 'b', color: '#8884d8', name: 'Ch9'  },
-  { dataKey: 'z', color: '#8884d8', name: 'Ch10'  },
-  { dataKey: 'y', color: '#8884d8', name: 'Ch11'  },
-  { dataKey: 'b', color: '#8884d8', name: 'Ch12'  },
-  { dataKey: 'z', color: '#8884d8', name: 'Ch13'  },
-  { dataKey: 'y', color: '#8884d8', name: 'Ch14'  },
-  { dataKey: 'b', color: '#8884d8', name: 'Ch15'  },
-  { dataKey: 'z', color: '#8884d8', name: 'Ch16'  },
-  { dataKey: 'y', color: '#8884d8', name: 'Ch17'  },
-  { dataKey: 'b', color: '#8884d8', name: 'Ch18'  },
-  { dataKey: 'a', color: '#8884d8', name: 'Ch19' ,},
-  { dataKey: 'a', color: '#8884d8', name: 'Ch20' , showXAxis: true}
+  { dataKey: 'z', color: '#000000', name: 'Ch1' },
+  { dataKey: 'z', color: '#000000', name: 'Ch2' },
+  { dataKey: 'b', color: '#000000', name: 'Ch3' },
+  { dataKey: 'z', color: '#000000', name: 'Ch4' },
+  { dataKey: 'y', color: '#000000', name: 'Ch5' },
+  { dataKey: 'b', color: '#000000', name: 'Ch6'  },
+  { dataKey: 'z', color: '#000000', name: 'Ch7'  },
+  { dataKey: 'y', color: '#000000', name: 'Ch8'  },
+  { dataKey: 'b', color: '#000000', name: 'Ch9'  },
+  { dataKey: 'z', color: '#000000', name: 'Ch10'  },
+  { dataKey: 'y', color: '#000000', name: 'Ch11'  },
+  { dataKey: 'b', color: '#000000', name: 'Ch12'  },
+  { dataKey: 'z', color: '#000000', name: 'Ch13'  },
+  { dataKey: 'y', color: '#000000', name: 'Ch14'  },
+  { dataKey: 'b', color: '#000000', name: 'Ch15'  },
+  { dataKey: 'z', color: '#000000', name: 'Ch16'  },
+  { dataKey: 'y', color: '#000000', name: 'Ch17'  },
+  { dataKey: 'b', color: '#000000', name: 'Ch18'  },
+  { dataKey: 'a', color: '#000000', name: 'Ch19' ,},
+  { dataKey: 'a', color: '#000000', name: 'Ch20' , showXAxis: true}
   , // Last one shows X axis
 ];
 
@@ -256,7 +256,7 @@ export default function PlotPage() {
         }}>
           {/* Left side - Plot area */}
           <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', flexShrink:0}}>
-            <h2 style={{ margin: '0 0 15px 0' }}>Sample Line Chart</h2>
+            <h2 style={{ margin: '0 0 15px 0' }}> EEG Data </h2>
             <div style={{ width: '1150px', height: '600px', display: 'flex', flexDirection: 'column', flexShrink: 0  // Prevent shrinking during updates
                 }}>
                   {subplotConfig.map((config, index) => (
@@ -362,7 +362,7 @@ export default function PlotPage() {
           }}>
             <div>
               <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', color: '#333' }}>
-                Type A Markers
+                Ground Truth Events
               </h3>
               <div style={{
                 width: '30px',
@@ -413,7 +413,7 @@ export default function PlotPage() {
 
             <div>
               <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', color: '#333' }}>
-                Type B Markers
+                Detections
               </h3>
               <div style={{
                 width: '30px',
